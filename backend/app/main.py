@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app import __version__
 from app.api import chat as chat_router
@@ -20,7 +21,6 @@ from app.core.exceptions import (
 )
 from app.core.logging import configure_logging
 from app.db.init_db import init_db
-from fastapi.responses import JSONResponse
 
 logger = logging.getLogger(__name__)
 
