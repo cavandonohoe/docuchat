@@ -1,0 +1,37 @@
+[
+  {
+    "id": "embedding-model",
+    "question": "Which embedding model does DocuChat use by default?",
+    "expected_answer": "text-embedding-3-small with 1536 dimensions.",
+    "source_file": "docuchat_overview.txt",
+    "must_include": ["text-embedding-3-small"]
+  },
+  {
+    "id": "default-top-k",
+    "question": "What is the default top-k for retrieval?",
+    "expected_answer": "The default top-k is 5.",
+    "source_file": "docuchat_overview.txt",
+    "must_include": ["5"]
+  },
+  {
+    "id": "chunk-defaults",
+    "question": "What are the default chunk size and overlap?",
+    "expected_answer": "Chunk size 800 characters, overlap 120 characters.",
+    "source_file": "docuchat_overview.txt",
+    "must_include": ["800", "120"]
+  },
+  {
+    "id": "vector-index",
+    "question": "What index type does the retriever use over the chunks table?",
+    "expected_answer": "An HNSW index on the chunks.embedding column using cosine distance.",
+    "source_file": "docuchat_overview.txt",
+    "must_include": ["HNSW"]
+  },
+  {
+    "id": "abstention",
+    "question": "What is DocuChat instructed to do when the context is insufficient?",
+    "expected_answer": "It abstains rather than guess.",
+    "source_file": "docuchat_overview.txt",
+    "must_include": ["abstain"]
+  }
+]

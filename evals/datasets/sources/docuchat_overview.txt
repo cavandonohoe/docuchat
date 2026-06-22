@@ -1,0 +1,30 @@
+# DocuChat Evaluation Corpus
+
+DocuChat is a retrieval-augmented generation application built with FastAPI,
+PostgreSQL, and pgvector. It allows users to upload documents and ask
+questions that are answered with citations back to the source.
+
+## Architecture
+
+The system has three main layers. The ingestion layer parses uploaded files,
+splits them into chunks, and embeds each chunk with the OpenAI
+`text-embedding-3-small` model. Each embedding is 1536 dimensions. The
+retrieval layer issues a cosine-distance query against a pgvector HNSW
+index on the `chunks` table. The generation layer composes a system prompt
+that instructs the model to cite sources with bracketed numeric markers,
+and to abstain when the context is insufficient.
+
+## Defaults
+
+The default chunk size is 800 characters with 120 characters of overlap.
+The default top-k is 5. The default chat model is `gpt-4o-mini`. These
+values are tuned for short technical documents and small evaluation sets;
+they should be retuned per corpus before any serious benchmarking.
+
+## Evaluation
+
+The evaluation harness reports three metrics. Retrieval hit-rate measures
+whether the expected source file appears in the retrieved chunks.
+Faithfulness is judged by an LLM that decides whether the answer is
+supported by the retrieved context. Citation validity is the fraction of
+in-answer `[n]` markers that point to a real retrieved chunk.
