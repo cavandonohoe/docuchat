@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     )
 
     openai_api_key: str = "sk-replace-me"
+    openai_base_url: str | None = None
     embedding_model: str = "text-embedding-3-small"
     embedding_dim: int = 1536
     chat_model: str = "gpt-4o-mini"

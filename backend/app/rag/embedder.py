@@ -27,7 +27,10 @@ class Embedder(Protocol):
 class OpenAIEmbedder:
     def __init__(self, client: OpenAI | None = None, model: str | None = None) -> None:
         settings = get_settings()
-        self._client = client or OpenAI(api_key=settings.openai_api_key)
+        self._client = client or OpenAI(
+            api_key=settings.openai_api_key,
+            base_url=settings.openai_base_url,
+        )
         self._model = model or settings.embedding_model
 
     @retry(
