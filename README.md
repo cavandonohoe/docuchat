@@ -109,6 +109,32 @@ export OPENAI_API_KEY='sk-...'
 uvicorn app.main:app --reload
 ```
 
+### Run for free with a local LLM (no OpenAI key)
+
+The LLM provider is pluggable via env vars — the OpenAI Python client speaks
+to any OpenAI-compatible endpoint. Set `OPENAI_BASE_URL` to point at a local
+runtime like [Ollama](https://ollama.com):
+
+```bash
+brew install ollama && brew services start ollama
+ollama pull nomic-embed-text          # 768-dim embeddings, ~270 MB
+ollama pull llama3.2:3b               # chat model, ~2 GB
+```
+
+Then in `.env`:
+
+```env
+OPENAI_API_KEY=ollama
+OPENAI_BASE_URL=http://localhost:11434/v1
+EMBEDDING_MODEL=nomic-embed-text
+EMBEDDING_DIM=768
+CHAT_MODEL=llama3.2:3b
+```
+
+Zero application code changes — only configuration. Swapping back to
+hosted OpenAI is `OPENAI_BASE_URL=` (empty), a real API key, and the
+default model names.
+
 ### API
 
 ```http
