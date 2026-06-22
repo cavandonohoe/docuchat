@@ -50,7 +50,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund --no-progress
 
       - name: Lint
         run: npm run lint -- --max-warnings=0
