@@ -33,8 +33,19 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+    let cancelled = false;
+    listDocuments().then(
+      (rows) => {
+        if (!cancelled) setDocs(rows);
+      },
+      (err: Error) => {
+        if (!cancelled) setUploadError(err.message);
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function handleUpload(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
