@@ -27,6 +27,11 @@ updates:
     commit-message:
       prefix: "deps"
     open-pull-requests-limit: 5
+    ignore:
+      # typescript-eslint (via eslint-config-next) supports TS <6.1 only.
+      # Drop this once it adds TypeScript 7 support.
+      - dependency-name: "typescript"
+        versions: [">=7"]
     groups:
       npm-minor-patch:
         update-types:
